@@ -1,0 +1,2 @@
+"# ProDesk-API"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/prodesk485/ProDesk-API.gitgit push -u origin main
+"# ProDesk-API"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/prodesk485/ProDesk-API.gitgit push -u origin main
