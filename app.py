@@ -33,6 +33,16 @@ def update_license(license_key, hardware_id, user):
     cursor.execute("UPDATE licenses SET hardware_id = ?, user = ? WHERE license_key = ?", (hardware_id, user, license_key))
     conn.commit()
     conn.close()
+    
+@app.route('/upload-db', methods=['POST'])
+def upload_db():
+    if 'file' not in request.files:
+        return 'No file part', 400
+    file = request.files['file']
+    if file.filename == '':
+        return 'No selected file', 400
+    file.save(DB_FILE)  # Save it as 'licenses.db'
+    return 'Uploaded', 200
 
 @app.route('/validate', methods=['POST'])
 def validate_license():
