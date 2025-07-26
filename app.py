@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Secret key for session
 
 # PostgreSQL connection
-POSTGRES_URI = "postgresql://postgres:vVpyHypgJxGoIKaNlQYVeUAhGuwHPqZe@yamabiko.proxy.rlwy.net:51869/railway"
+POSTGRES_URI = os.getenv("postgresql://postgres:vVpyHypgJxGoIKaNlQYVeUAhGuwHPqZe@yamabiko.proxy.rlwy.net:51869/railway")
 conn = psycopg2.connect(POSTGRES_URI)
 cursor = conn.cursor()
 
