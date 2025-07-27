@@ -8,6 +8,7 @@ app.secret_key = os.urandom(24)  # Secret key for session
 load_dotenv()
 # PostgreSQL connection
 POSTGRES_URI = os.getenv("POSTGRES_URI")
+print("POSTGRES_URI:",POSTGRES_URI)
 conn = psycopg2.connect(POSTGRES_URI)
 cursor = conn.cursor()
 
