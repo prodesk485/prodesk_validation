@@ -10,7 +10,7 @@ POSTGRES_URI = os.getenv("postgresql://postgres:vVpyHypgJxGoIKaNlQYVeUAhGuwHPqZe
 conn = psycopg2.connect(POSTGRES_URI)
 cursor = conn.cursor()
 
-# Admin credentials (change these)
+# Admin credentials (change thse)
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "hanzala1H@09"
 
@@ -110,4 +110,5 @@ def logout():
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True)
+    port = int(os.environ.get('PORT',5000))
+    app.run(host='0.0.0.0',port=port)
