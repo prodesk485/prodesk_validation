@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify, render_template_string, redirect, url_for, session
 import psycopg2
+from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Secret key for session
-
+load_dotenv()
 # PostgreSQL connection
-POSTGRES_URI = os.getenv("postgresql://postgres:vVpyHypgJxGoIKaNlQYVeUAhGuwHPqZe@yamabiko.proxy.rlwy.net:51869/railway")
+POSTGRES_URI = os.getenv("POSTGRES_URI")
 conn = psycopg2.connect(POSTGRES_URI)
 cursor = conn.cursor()
 
