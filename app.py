@@ -104,7 +104,7 @@ def login():
 def dashboard():
     if not session.get("admin"):
         return redirect(url_for("login"))
-    cursor.execute("SELECT * FROM licenses")
+    cursor.execute("SELECT * FROM _licenses")
     rows = cursor.fetchall()
     return render_template_string(DASHBOARD_TEMPLATE, rows=rows)
 
