@@ -82,7 +82,7 @@ def validate():
         return jsonify({"status": "inactive", "message": "Key is deactivated"}), 403
 
     if db_hwid is None:
-        cursor.execute("UPDATE licenses SET hardware_id = %s, user = %s WHERE license_key = %s", (hwid, user, key))
+        cursor.execute("UPDATE _licenses SET hardware_id = %s, user = %s WHERE license_key = %s", (hwid, user, key))
         conn.commit()
         return jsonify({"status": "valid", "user": user})
 
