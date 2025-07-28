@@ -62,12 +62,12 @@ def validate():
     data = request.get_json()
     key = data.get("license_key")
     hwid = data.get("hardware_id")
-    user = data.get("user", "Unknown")
+    user_name = data.get("user_name", "Unknown")
 
     if not key or not hwid:
         return jsonify({"status": "error", "message": "Missing license key or hardware ID"}), 400
     try:
-        cursor.execute("SELECT license_key, hardware_id, user, active FROM _licenses WHERE license_key = %s", (key,))
+        cursor.execute("SELECT license_key, hardware_id, user_name, active FROM _licenses WHERE license_key = %s", (key,))
         row = cursor.fetchone()
         print (row)
     except psycopg2.Error as e:
@@ -82,9 +82,9 @@ def validate():
         return jsonify({"status": "inactive", "message": "Key is deactivated"}), 403
 
     if db_hwid is None:
-        cursor.execute("UPDATE _licenses SET hardware_id = %s, user = %s WHERE license_key = %s", (hwid, user, key))
+        cursor.execute("UPDATE _licenses SET hardware_id = %s, user_name = %s WHERE license_key = %s", (hwid, user_name, key))
         conn.commit()
-        return jsonify({"status": "valid", "user": user})
+        return jsonify({"status": "valid", "user": user_name})
 
     if db_hwid == hwid:
         return jsonify({"status": "valid", "user": db_user})
