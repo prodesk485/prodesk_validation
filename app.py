@@ -66,10 +66,13 @@ def validate():
 
     if not key or not hwid:
         return jsonify({"status": "error", "message": "Missing license key or hardware ID"}), 400
-
-    cursor.execute("SELECT license_key, hardware_id, user_name, active FROM _licenses WHERE license_key = %s", (key,))
-    row = cursor.fetchone()
-
+    try:
+        cursor.execute("SELECT license_key, hardware_id, user, active FROM _licenses WHERE license_key = %s", (key,))
+        row = cursor.fetchone()
+        print (row)
+    except psycopg2.Error as e:
+        print("DataBase error:", e)
+        conn.rollback()
     if not row:
         return jsonify({"status": "invalid", "message": "Key not found"}), 404
 
