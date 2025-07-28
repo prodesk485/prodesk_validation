@@ -51,7 +51,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS licenses (
             license_key TEXT PRIMARY KEY,
             hardware_id TEXT,
-            user_name TEXT,
+            user TEXT,
             active INTEGER DEFAULT 1
         )
     ''')
@@ -79,7 +79,7 @@ def validate():
         return jsonify({"status": "inactive", "message": "Key is deactivated"}), 403
 
     if db_hwid is None:
-        cursor.execute("UPDATE licenses SET hardware_id = %s, user_name = %s WHERE license_key = %s", (hwid, user, key))
+        cursor.execute("UPDATE licenses SET hardware_id = %s, user = %s WHERE license_key = %s", (hwid, user, key))
         conn.commit()
         return jsonify({"status": "valid", "user": user})
 
