@@ -48,7 +48,7 @@ DASHBOARD_TEMPLATE = '''
 
 def init_db():
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS licenses (
+        CREATE TABLE IF NOT EXISTS _licenses (
             license_key TEXT PRIMARY KEY,
             hardware_id TEXT,
             user TEXT,
@@ -67,7 +67,7 @@ def validate():
     if not key or not hwid:
         return jsonify({"status": "error", "message": "Missing license key or hardware ID"}), 400
 
-    cursor.execute("SELECT license_key, hardware_id, user_name, active FROM licenses WHERE license_key = %s", (key,))
+    cursor.execute("SELECT license_key, hardware_id, user_name, active FROM _licenses WHERE license_key = %s", (key,))
     row = cursor.fetchone()
 
     if not row:
